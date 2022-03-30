@@ -129,6 +129,7 @@ public:
     }
 
     // Centered on main screen
+#ifdef XPLM300
     void setWindowCentered() {
         int screen_left, screen_top, screen_right, screen_bottom;
         XPLMGetScreenBoundsGlobal(&screen_left, &screen_top, &screen_right, &screen_bottom);
@@ -138,6 +139,17 @@ public:
         int bottom = top + getHeight();
         setWindowBounds(Rect{left, top, right, bottom});
     }
+#else
+    void setWindowCentered() {
+        int screen_width, screen_height;
+        XPLMGetScreenSize(&screen_width, &screen_height);
+        int left = screen_width / 2 - getWidth() / 2;
+        int right = screen_width / 2 + getWidth() / 2;
+        int top = screen_height / 2 + getHeight() / 2;
+        int bottom = screen_height / 2 - getHeight() / 2;
+        setWindowBounds(Rect{left, top, right, bottom});
+    }
+#endif
 
     void setWindowResizeLimits([[maybe_unused]] int min_width, [[maybe_unused]] int min_height, [[maybe_unused]] int max_width, [[maybe_unused]] int max_height) {
 #ifdef XPLM300
