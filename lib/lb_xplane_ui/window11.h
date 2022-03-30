@@ -130,12 +130,12 @@ public:
 
     // Centered on main screen
     void setWindowCentered() {
-        int screen_width, screen_height;
-        XPLMGetScreenSize(&screen_width, &screen_height);
-        int left = screen_width / 2 - getWidth() / 2;
-        int right = screen_width / 2 + getWidth() / 2;
-        int top = screen_height / 2 + getHeight() / 2;
-        int bottom = screen_height / 2 - getHeight() / 2;
+        int screen_left, screen_top, screen_right, screen_bottom;
+        XPLMGetScreenBoundsGlobal(&screen_left, &screen_top, &screen_right, &screen_bottom);
+        int left = screen_left + 10;
+        int right = left + getWidth();
+        int top = screen_top + 50;
+        int bottom = top + getHeight();
         setWindowBounds(Rect{left, top, right, bottom});
     }
 
