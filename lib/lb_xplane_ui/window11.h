@@ -136,9 +136,8 @@ public:
         XPLMGetScreenBoundsGlobal(&screen_left, &screen_top, &screen_right, &screen_bottom);
         int left = screen_left + 100;
         int right = left + getWidth();
-        int top = screen_top - 200;
-        int bottom = top - getHeight();
-	    
+	int bottom = screen_bottom + 100;
+        int top = getHeight() + bottom;	    
         setWindowBounds(Rect{left, top, right, bottom});
     }
 #else
