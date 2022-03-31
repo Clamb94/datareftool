@@ -134,10 +134,13 @@ public:
     void setWindowCentered() {
         int screen_left, screen_top, screen_right, screen_bottom;
         XPLMGetScreenBoundsGlobal(&screen_left, &screen_top, &screen_right, &screen_bottom);
-        int left = screen_left + 100;
+	int screen_width = screen_right - screen_left;
+	int screen_height = screen_top - screen_bottom;
+	    
+        int left = screen_left + screen_width / 2 - getWidth() / 2;
         int right = left + getWidth();
-	int bottom = screen_bottom + 100;
-        int top = getHeight() + bottom;	    
+	int bottom = screen_bottom + screen_height / 2 - getHeight() / 2;
+        int top = bottom + getHeight();	    
         setWindowBounds(Rect{left, top, right, bottom});
     }
 #else
